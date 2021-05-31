@@ -57,19 +57,14 @@ bool validate(std::string id, std::string password)
 {
         //read from file, see if id and password are good
         user U = read(id,password,0);
-        std::cout<<U.pass<<std::endl;
         if(U.ID==id && U.pass == password)
         {
                 return true;
         }
-        else
-        {
-                return false;
-        }
+        return false;
 }
 
 //read data from users account
-//password will be optional
 
 user read(std::string id, std::string password, int option)
 {
@@ -81,8 +76,6 @@ user read(std::string id, std::string password, int option)
         std::stack <std::string> S;
         //goes over the entire line
         while(std::getline(readfile, placeholder)) {
-                //compare and stuff
-                std::cout<<placeholder<<std::endl;
                 //go over all the characters
                 std::string temp;
                 int count=0;
@@ -101,20 +94,15 @@ user read(std::string id, std::string password, int option)
                     }
                 }
                 //this is an ugly way, fix this
-                std::string ch;
-                ch=S.top();
-                std::cout<<ch<<std::endl;
-                U.balance=std::stoi(ch);
+                U.balance=std::stoi(S.top());
                 S.pop();
-
                 U.pass=S.top();
                 S.pop();
                 U.ID=S.top();
                 S.pop();
-                std::cout<<U.pass<<" and "<<U.ID<<std::endl;
-                if(U.pass==password&&U.ID==id)
+
+                if(U.pass==password&&U.ID==id) //found it?
                 {
-                    //thats it
                     readfile.close();
                     return U;
                 }
