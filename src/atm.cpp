@@ -1,6 +1,6 @@
-#include "atm.h"
 #include <iostream>
-#include "validate.cpp"
+#include "atm.h"
+//#include "validate.cpp"
 
 int main(int agrc, char *agrv[])
 {
@@ -46,4 +46,15 @@ void login(){
         }
         //remove this later
         exit(0);
+}
+bool validate(std::string id, std::string password)
+{
+        if(id=="liam" && password == "password")
+        {
+                return true;
+        }
+        else
+        {
+                return false;
+        }
 }
