@@ -9,9 +9,6 @@ int main(int agrc, char *agrv[])
 {
         std::string input = "";
         //Call loop func until exit
-        //
-
-        //init ids and passwds?
         while(1)
         {
         //switch statement might be better, but for now just ifelse
@@ -52,24 +49,16 @@ void login(){
                 std::cout<<"Error. Incorrect Password. Signing out"<<std::endl;
                 signed_inflag=false;
         }
-        //remove this later
-        //exit(0);
-}
 
-//create struct for user
-//struct user {
-//      std::string ID;
-//      std::string pass;
-//      int balance;
-//};
+}
 
 //Validate user
 bool validate(std::string id, std::string password)
 {
         //read from file, see if id and password are good
         user U = read(id,password,0);
-
-        if(U.ID=="NULL" && U.pass == "NULL")
+        std::cout<<U.pass<<std::endl;
+        if(U.ID==id && U.pass == password)
         {
                 return true;
         }
@@ -82,30 +71,6 @@ bool validate(std::string id, std::string password)
 //read data from users account
 //password will be optional
 
-user getvalues(std::string id, std::string password)
-{
-    return read(id,password,0);
-    /*
-    if(signed_inflag=true && password == "")
-    {
-        return readoptions(id,password);
-    }
-    else{
-        return read(id,password);
-    }
-    */
-
-}
-/*
-user readoptions(std::string id)
-{
-    //just return the BALANCE and the ID
-    user U;
-    std::ifstream readfile;
-    readfile.open("accounts.txt");
-    std::string placeholder;
-}
-*/
 user read(std::string id, std::string password, int option)
 {
         std::ifstream readfile;
@@ -113,7 +78,7 @@ user read(std::string id, std::string password, int option)
         std::string placeholder;
 
         user U;
-        std::stack<std::string> S;
+        std::stack <std::string> S;
         //goes over the entire line
         while(std::getline(readfile, placeholder)) {
                 //compare and stuff
@@ -124,7 +89,7 @@ user read(std::string id, std::string password, int option)
                 for(int x=0;x<placeholder.size();x++)
                 {
                     //If it equals space
-                    if(placeholder[x]==' ')
+                    if(placeholder[x]==',')
                     {
                         count++;
                         S.push(temp);
@@ -132,18 +97,21 @@ user read(std::string id, std::string password, int option)
                     }
                     //else add it to temp
                     else{
-
                         temp.append(1, placeholder[x]);
                     }
                 }
                 //this is an ugly way, fix this
-                S.top
-                U.balance=std::stoi(S.top());
+                std::string ch;
+                ch=S.top();
+                std::cout<<ch<<std::endl;
+                U.balance=std::stoi(ch);
                 S.pop();
+
                 U.pass=S.top();
                 S.pop();
                 U.ID=S.top();
                 S.pop();
+                std::cout<<U.pass<<" and "<<U.ID<<std::endl;
                 if(U.pass==password&&U.ID==id)
                 {
                     //thats it
@@ -151,7 +119,6 @@ user read(std::string id, std::string password, int option)
                     return U;
                 }
                 //else keep going
-
         }
 
         readfile.close();
