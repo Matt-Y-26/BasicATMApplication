@@ -1,6 +1,8 @@
 #include <iostream>
 #include "atm.h"
 #include <fstream>
+#include <stack>
+#include <string>
 //#include "validate.cpp"
 
 int main(int agrc, char *agrv[])
@@ -63,14 +65,14 @@ bool validate(std::string id, std::string password)
 {
         //read from file, see if id and password are good
         user U = read(id,password);
-        if(U.ID=="NULL" && U.pass == "NULL")
+
+        if(U.ID=="liam" && U.pass == "password")
         {
-                std::cout<<"Error: Incorrect Password"<<std::endl;
-                return false;
+                return true;
         }
         else
         {
-                return true;
+                return false;
         }
 }
 
@@ -78,18 +80,31 @@ bool validate(std::string id, std::string password)
 //password will be optional
 user read(std::string id, std::string password)
 {
-        //initialize vars and user
         std::ifstream readfile;
         readfile.open("accounts.txt");
         std::string placeholder;
-        user U;
 
+        user U;
+        std::stack<std::string> S;
+        //goes over the entire line
         while(std::getline(readfile, placeholder)) {
                 //compare and stuff
+                std::cout<<placeholder<<std::endl;
+                //go over all the characters
+                std::string temp;
+                for(int x=0;x<placeholder.size();x++)
+                {
+                    //If it doesn't equal space
+                    if(placeholder[x]!=' ')
+                    {
+                        //append needs: size, chars
+                        temp.append(1, placeholder[x]);
+                    }
+                }
                 //return U; //remove this later
-
         }
 
+        readfile.close();
         return U;
 
 }
