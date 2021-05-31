@@ -1,6 +1,6 @@
 #include "atm.h"
 #include <iostream>
-
+#include "validate.cpp"
 
 int main(int agrc, char *agrv[])
 {
@@ -13,16 +13,17 @@ int main(int agrc, char *agrv[])
         //switch statement might be better, but for now just ifelse
         std::cout<<"Please type 'login' or 'exit'"<<std::endl;
         std::getline (std::cin,input);
-        if(input=="login"){
-                login();
-        }
-        else if(input=="exit"){
-                return 0;
-        }
-        else
-        {
-                std::cout<<"Error: Not login or exit. Try Again"<<std::endl;
-        }
+                if(input=="login"){
+                        login();
+                }
+                else if(input=="exit"){
+                        return 0;
+                }
+                else
+                {
+                        std::cout<<"Error: Not login or exit. Try Again"<<std::endl;
+                }
+
         }
 }
 
@@ -35,6 +36,7 @@ void login(){
         std::getline (std::cin,pass);
 
         if(validate(ID,pass))
+        //if(true)
         {
 
         }
@@ -44,10 +46,4 @@ void login(){
         }
         //remove this later
         exit(0);
-}
-
-bool validate(std::string ID,std::string pass)
-{
-        //obviously, change this later
-        return true;
 }
