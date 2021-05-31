@@ -10,5 +10,6 @@ struct person {
 
 bool validate(std::string ID, std::string pass)
 {
+        std::cout<<"we got here"<<std::endl;
         return true;
 }
