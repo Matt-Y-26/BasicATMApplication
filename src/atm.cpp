@@ -43,14 +43,17 @@ void login(){
         if(validate(ID,pass))
         //if(true)
         {
-
+            std::cout<<"Welcome"<<std::endl;
+            options(ID);
+            signed_inflag=true;
         }
         else
         {
                 std::cout<<"Error. Incorrect Password. Signing out"<<std::endl;
+                signed_inflag=false;
         }
         //remove this later
-        exit(0);
+        //exit(0);
 }
 
 //create struct for user
@@ -64,9 +67,9 @@ void login(){
 bool validate(std::string id, std::string password)
 {
         //read from file, see if id and password are good
-        user U = read(id,password);
+        user U = read(id,password,0);
 
-        if(U.ID=="liam" && U.pass == "password")
+        if(U.ID=="NULL" && U.pass == "NULL")
         {
                 return true;
         }
@@ -78,7 +81,32 @@ bool validate(std::string id, std::string password)
 
 //read data from users account
 //password will be optional
-user read(std::string id, std::string password)
+
+user getvalues(std::string id, std::string password)
+{
+    return read(id,password,0);
+    /*
+    if(signed_inflag=true && password == "")
+    {
+        return readoptions(id,password);
+    }
+    else{
+        return read(id,password);
+    }
+    */
+
+}
+/*
+user readoptions(std::string id)
+{
+    //just return the BALANCE and the ID
+    user U;
+    std::ifstream readfile;
+    readfile.open("accounts.txt");
+    std::string placeholder;
+}
+*/
+user read(std::string id, std::string password, int option)
 {
         std::ifstream readfile;
         readfile.open("accounts.txt");
@@ -92,16 +120,38 @@ user read(std::string id, std::string password)
                 std::cout<<placeholder<<std::endl;
                 //go over all the characters
                 std::string temp;
+                int count=0;
                 for(int x=0;x<placeholder.size();x++)
                 {
-                    //If it doesn't equal space
-                    if(placeholder[x]!=' ')
+                    //If it equals space
+                    if(placeholder[x]==' ')
                     {
-                        //append needs: size, chars
+                        count++;
+                        S.push(temp);
+                        temp="";
+                    }
+                    //else add it to temp
+                    else{
+
                         temp.append(1, placeholder[x]);
                     }
                 }
-                //return U; //remove this later
+                //this is an ugly way, fix this
+                S.top
+                U.balance=std::stoi(S.top());
+                S.pop();
+                U.pass=S.top();
+                S.pop();
+                U.ID=S.top();
+                S.pop();
+                if(U.pass==password&&U.ID==id)
+                {
+                    //thats it
+                    readfile.close();
+                    return U;
+                }
+                //else keep going
+
         }
 
         readfile.close();
