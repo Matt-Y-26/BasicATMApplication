@@ -1,5 +1,6 @@
 #include <iostream>
 #include "atm.h"
+#include <fstream>
 //#include "validate.cpp"
 
 int main(int agrc, char *agrv[])
@@ -27,6 +28,7 @@ int main(int agrc, char *agrv[])
         }
 }
 
+//Login
 void login(){
         //get id and pass
         std::string ID, pass;
@@ -47,8 +49,18 @@ void login(){
         //remove this later
         exit(0);
 }
+
+//create struct for user
+struct user {
+        std::string ID;
+        std::string pass;
+        int balance;
+};
+
+//Validate user
 bool validate(std::string id, std::string password)
 {
+        //read from file, see if id and password are good
         if(id=="liam" && password == "password")
         {
                 return true;
@@ -57,4 +69,30 @@ bool validate(std::string id, std::string password)
         {
                 return false;
         }
+}
+
+//read data from users account
+//password will be optional
+int read(std::string id, std::string password)
+{
+        std::ifstream readfile;
+        readfile.open("accounts.txt");
+        std::string placeholder;
+
+        while(std::getline(readfile, placeholder)) {
+                //compare and stuff
+                return 0; //remove this later
+        }
+
+        return 0;
+
+}
+
+
+//Options Menu withdraw/deposit
+void options(std::string id)
+{
+        std::cout<<"Enter 1 to deposit and enter 2 to withdraw"<<std::endl;
+        return;
+
 }
