@@ -15,5 +15,6 @@ user read (std::string id, std::string password, int option);
 void options(std::string id);
 user getvalues (std::string id, std::string password);
 user readoptions (std::string id, std::string password);
+bool moreTransactions();
 
 #endif
