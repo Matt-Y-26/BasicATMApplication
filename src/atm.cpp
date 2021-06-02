@@ -195,3 +195,7 @@ bool moreTransactions()
             // if there is any other inptu, ask for a valid input
         }
     }
+    //TODO make the withdraw + deposit continue check into 1 function,
+            // change the int in withCheck and depCheck to bool
+    return true;
+}
