@@ -4,6 +4,7 @@
 #include <stack>
 #include <string>
 
+//Matt's
 int main(int agrc, char *agrv[])
 {
         std::string input = "";
@@ -113,7 +114,7 @@ user read(std::string id, std::string password, int option)
 
 }
 
-
+//G's code
 //Options Menu withdraw/deposit
 void options(std::string id)
 {
