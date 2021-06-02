@@ -4,7 +4,6 @@
 #include <stack>
 #include <string>
 
-//Matt's
 int main(int agrc, char *agrv[])
 {
         std::string input = "";
@@ -70,6 +69,11 @@ user read(std::string id, std::string password, int option)
 {
         std::ifstream readfile;
         readfile.open("accounts.txt");
+        if(!readfile.is_open())
+        {
+            std::cerr << "COULD NOT OPEN ACCOUNTS" << std::endl;
+        }
+
         std::string placeholder;
 
         user U;
@@ -114,7 +118,7 @@ user read(std::string id, std::string password, int option)
 
 }
 
-//G's code
+
 //Options Menu withdraw/deposit
 void options(std::string id)
 {
