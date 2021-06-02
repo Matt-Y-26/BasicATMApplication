@@ -1,0 +1,2 @@
+frank,password1,1500,
+bobby,pas,20,
